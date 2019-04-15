@@ -1,0 +1,3 @@
+rootProject.name = 'riichi_calc'
+
+include ':app'
