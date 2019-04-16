@@ -19,7 +19,7 @@ export default class App extends Component{
     this.calculate = this.calculate.bind(this);
   }
 
-  calculate(fu, han)
+  calculate(fu, han, oya)
   {
     if(han >= 5)
     {
@@ -51,9 +51,17 @@ export default class App extends Component{
     }
 
 
-    oyaValue = Math.ceil(value / 2 / 100) * 100
-    koValue = Math.ceil(value / 4 / 100) * 100
-
+    if(oya)
+    {
+      value = value * 1.5
+      oyaValue = ""
+      koValue = Math.ceil(value / 3 / 100) * 100
+    }
+    else
+    {
+      oyaValue = Math.ceil(value / 2 / 100) * 100
+      koValue = Math.ceil(value / 4 / 100) * 100
+    }
 
 
     this.setState({ handValue: value, oyaValue: oyaValue, koValue: koValue })
@@ -69,13 +77,20 @@ export default class App extends Component{
     return (
       <View style={styles.container}>
         <View >
+          <Switch
+          value = {this.state.oya}
+          onValueChange={(value)=>{
+            this.setState({oya: !this.state.oya});
+            this.calculate(this.state.fu, this.state.han, value);
+          }}
+          />
         <Text>Fu</Text>
           <Picker
             selectedValue={this.state.fu}
             style={{ height: 50, width: 100 }}
             onValueChange={(itemValue, itemIndex) =>{
               this.setState({ fu: itemValue });
-              this.calculate(itemValue, this.state.han);
+              this.calculate(itemValue, this.state.han, this.state.oya);
             }
 
             }>
@@ -90,7 +105,7 @@ export default class App extends Component{
             style={{ height: 50, width: 100 }}
             onValueChange={(itemValue, itemIndex) =>{
               this.setState({ han: itemValue });
-              this.calculate(this.state.fu, itemValue);
+              this.calculate(this.state.fu, itemValue, this.state.oya);
             }
             }>
             {([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]).map(value => {
@@ -101,8 +116,9 @@ export default class App extends Component{
           </Picker>
         </View>
         <View>
+
           <Text>
-            {this.state.handValue}({this.state.oyaValue} / {this.state.koValue})
+            {this.state.handValue}{(this.state.oya) ? `(${this.state.koValue})` : `(${this.state.oyaValue} / ${this.state.koValue})`}
           </Text>
         </View>
       </View>
