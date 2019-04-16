@@ -89,7 +89,13 @@ export default class App extends Component{
 
   showFuHelp()
   {
-    Alert.alert("符 Fu Helper:", "Titulo")
+    Alert.alert("符 Fu Helper:", "Ganar: 20 \n Ron con mano oculta: 10 \n \
+    Pareja de dragones o viento relevante: 2 \n \
+    Pon simples expuesto / oculto: 2 / 4 \n \
+    Pon terminales/honores expuesto/oculto: 4 / 8  \n \
+    Kan simples expuesto / oculto: 8 / 16 \n \
+    Kan terminales expuesto / oculto 16 / 32 \n \
+    Single / Side / Closed wait: 2")
   }
 
   render() {
