@@ -37,8 +37,16 @@ export default class App extends Component{
     }
     else
     {
-      value = fu * Math.pow(2, han + 2) * 4
-      value = Math.ceil(value / 100) * 100
+      if((han == 4 && fu >= 40) || (han == 3 && fu >= 70) )
+      {
+        value = 8000
+      }
+      else
+      {
+        value = fu * Math.pow(2, han + 2) * 4
+        value = Math.ceil(value / 100) * 100
+      }
+      
     }
 
 
@@ -65,8 +73,12 @@ export default class App extends Component{
   }
   name()
   {
-    if(this.state.han <5)
+    if(this.state.han < 5)
     {
+      if(this.state.handValue == 8000 || this.state.handValue == 12000)
+      {
+        return "満貫 Mangan";
+      }
       return "";
     }
     else if(this.state.han == 5)
@@ -119,21 +131,6 @@ export default class App extends Component{
         </View>
         <View style={styles.row}>
             <View style={styles.container}>
-              <Text>Fu</Text>
-              <Picker
-                selectedValue={this.state.fu}
-                style={{ height: 50, width: 100 }}
-                onValueChange={(itemValue, itemIndex) =>{
-                  this.setState({ fu: itemValue });
-                  this.calculate(itemValue, this.state.han, this.state.oya);
-                }
-
-                }>
-                {[20, 25, 30, 40, 50, 60, 70, 80, 90, 100, 110].map(value =>{return <Picker.Item key={`fu_${value}`}
-                  label={`${value}`} value={value} />})}
-              </Picker>
-            </View>
-            <View style={styles.container}>
               <Text>Han</Text>
               <Picker
                 selectedValue={this.state.han}
@@ -148,6 +145,21 @@ export default class App extends Component{
                     label={`${value}`} value={value} />
                 })}
 
+              </Picker>
+            </View>
+            <View style={styles.container}>
+              <Text>Fu</Text>
+              <Picker
+                selectedValue={this.state.fu}
+                style={{ height: 50, width: 100 }}
+                onValueChange={(itemValue, itemIndex) =>{
+                  this.setState({ fu: itemValue });
+                  this.calculate(itemValue, this.state.han, this.state.oya);
+                }
+
+                }>
+                {[20, 25, 30, 40, 50, 60, 70, 80, 90, 100, 110].map(value =>{return <Picker.Item key={`fu_${value}`}
+                  label={`${value}`} value={value} />})}
               </Picker>
             </View>
         </View>
