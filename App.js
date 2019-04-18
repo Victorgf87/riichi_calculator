@@ -46,7 +46,7 @@ export default class App extends Component{
         value = fu * Math.pow(2, han + 2) * 4
         value = Math.ceil(value / 100) * 100
       }
-      
+
     }
 
 
@@ -102,6 +102,7 @@ export default class App extends Component{
   showFuHelp()
   {
     Alert.alert("符 Fu Helper:", "Ganar: 20 \n Ron con mano oculta: 10 \n \
+    Tsumo sin pinfu: 2 \n \
     Pareja de dragones o viento relevante: 2 \n \
     Pon simples expuesto / oculto: 2 / 4 \n \
     Pon terminales/honores expuesto/oculto: 4 / 8  \n \
